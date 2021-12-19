@@ -5,6 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -20,7 +23,7 @@ class MainActivity : ComponentActivity() {
             ComposeAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    HelloContent()
+
                 }
             }
         }
@@ -33,21 +36,12 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun HelloContent() {
-    Column(modifier = Modifier.padding(16.dp)) {
-//        val mutableState = remember { mutableStateOf("") }
-        var name by mutableStateOf(1)
-            Text(
-                text = "Hello, $name!",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = MaterialTheme.typography.h5
-            )
-
-        LaunchedEffect(name) {
-            delay(3000)
-            name++
-        }
-
+fun ReocrdList() {
+    LazyColumn() {
+        items(
+            count = 3,
+            itemContent = { CardItem() }
+        )
     }
 }
 
