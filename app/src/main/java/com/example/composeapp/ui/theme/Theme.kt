@@ -37,7 +37,7 @@ fun ComposeAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compos
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = PopinsTypography,
         shapes = Shapes,
         content = content
     )
