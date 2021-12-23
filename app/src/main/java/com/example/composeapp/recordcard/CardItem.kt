@@ -1,6 +1,7 @@
 package com.example.composeapp.recordcard
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -14,14 +15,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.composeapp.R
 
 @Composable
-fun CardItem() {
+fun CardItem(navController: NavController) {
     Card(
-        Modifier.padding(top = 12.dp, start = 12.dp, end = 12.dp),
-        shape = RoundedCornerShape(12.dp)
+        Modifier
+            .padding(top = 12.dp, start = 12.dp, end = 12.dp)
+            .clickable {
+                navController.navigate("recordDetail")
+            },
+        shape = RoundedCornerShape(12.dp),
     ) {
         Column(
             Modifier
@@ -61,10 +66,4 @@ fun CardItem() {
         }
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun showCardItem() {
-    CardItem()
 }

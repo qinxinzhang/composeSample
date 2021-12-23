@@ -3,41 +3,46 @@ package com.example.composeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.composeapp.recordcard.CardItem
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.composeapp.recordcard.RecordDetailScreen
+import com.example.composeapp.recordcard.RecordListScreen
 import com.example.composeapp.ui.theme.ComposeAppTheme
+import com.google.accompanist.pager.ExperimentalPagerApi
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             ComposeAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    RecordList()
+                    NavigationComponent(navController)
                 }
             }
         }
     }
 }
 
-@Composable
-fun RecordList() {
-    LazyColumn {
-        items(
-            count = 4,
-            itemContent = { CardItem() }
-        )
-    }
-}
 
-@Preview(showBackground = true)
+@ExperimentalPagerApi
 @Composable
-fun DefaultPreview() {
-    ComposeAppTheme {
-        RecordList()
+fun NavigationComponent(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        startDestination = "recordList"
+    ) {
+        composable("recordList") {
+            RecordListScreen(navController)
+        }
+        composable("recordDetail") {
+            RecordDetailScreen()
+        }
     }
 }
