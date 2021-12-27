@@ -46,7 +46,7 @@ fun LoginScreen(navHostController: NavHostController) {
                 .fillMaxWidth()
                 .height(IntrinsicSize.Max)
                 .clickable {
-                    navHostController.navigate(HomeNavigationItem.Appointment.route)
+                    navHostController.navigate(HomeNavigationItem.Appointment.route + "/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVHlwZSI6InVzZXJzIiwiZW1haWwiOiJsZnRlc3RhY2MxMkBnbWFpbC5jb20iLCJpZCI6IjFmNGI3N2ExLWJiOWYtNDg5MS05OTg5LTg5NTc5ODI5MTIyNyIsImtleV9pZCI6Ijc5OTBjMGE2MzU4ODQ4MzI5ODAzNzhlZmU3OTNlNDFlIiwiZXBvY2giOjE2NDA1OTk5NzYsInBhcnRuZXJfbmFtZSI6ImFuZHJvaWQtYXBwIiwidHlwZSI6MCwiaWF0IjoxNjQwNTk5Mzc2LCJleHAiOjE2NDA2MDI5NzZ9.x1M2udftCnq566CxZaMra9wKDbo_NTrTFEgoXIXSCSg")
                 }
         )
 

@@ -4,13 +4,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.composeapp.R
+import com.example.composeapp.data.database.model.RecordViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
@@ -24,8 +27,12 @@ fun RecordListScreen(navController: NavController, token: String) {
     // Creates a CoroutineScope bound to the MoviesScreen's lifecycle
     val tabTitles = listOf("All", "Upcoming", "Missed", "Completed", "Cancelled")
     val pagerState = rememberPagerState()
+    val recordViewModel: RecordViewModel = viewModel()
     // Creates a CoroutineScope bound to the MoviesScreen's lifecycle
     val scope = rememberCoroutineScope()
+    LaunchedEffect(key1 = "", block = {
+        recordViewModel.getRecordList(token)
+    })
     Column {
         ScrollableTabRow(
             backgroundColor = Color.White,
@@ -65,7 +72,17 @@ fun RecordListScreen(navController: NavController, token: String) {
             ) {
                 items(
                     count = 5,
-                    itemContent = { CardItem(navController) }
+                    itemContent = {
+                        recordViewModel.recordResponse.baseResponse?.d?.Items?.let { list ->
+                            list.forEach {
+                                CardItem(
+                                    navController = navController,
+                                    record = it,
+                                    recordViewModel.recordResponse.date ?: ""
+                                )
+                            }
+                        }
+                    }
                 )
             }
 

@@ -30,7 +30,7 @@ fun NavGraph(navController: NavHostController) {
             HomeScreen()
         }
 
-        composable(HomeNavigationItem.Appointment.route) { backStackEntry ->
+        composable(HomeNavigationItem.Appointment.route + "/{token}") { backStackEntry ->
             backStackEntry.arguments?.getString("token")
                 ?.let { RecordListScreen(navController, it) }
         }

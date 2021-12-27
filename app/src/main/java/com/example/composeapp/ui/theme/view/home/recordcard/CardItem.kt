@@ -17,9 +17,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.composeapp.R
+import com.example.composeapp.data.database.model.Item
+import com.example.composeapp.data.database.model.helper.RecordType
+import com.example.composeapp.utils.TeleDoctorHelper
 
 @Composable
-fun CardItem(navController: NavController) {
+fun CardItem(navController: NavController, record: Item, currentTime: String) {
     Card(
         Modifier
             .padding(top = 12.dp, start = 12.dp, end = 12.dp)
@@ -42,7 +45,14 @@ fun CardItem(navController: NavController) {
 
                 ) {
                 Text(
-                    text = "You have an appointment now",
+                    text = getStatus(
+                        TeleDoctorHelper.convertRecordStatus(
+                            record.status,
+                            currentTime,
+                            record.start,
+                            record.end
+                        )
+                    ),
                     style = MaterialTheme.typography.h5,
                     color = colorResource(id = R.color.black_111)
                 )
@@ -65,5 +75,37 @@ fun CardItem(navController: NavController) {
             )
         }
     }
+}
 
+fun getStatus(recordType: Int): String {
+    return when (recordType) {
+        RecordType.TYPE_UPCOMING -> {
+            "Upcoming"
+        }
+        RecordType.TYPE_HAPPENING_NOW -> {
+            "Happening now"
+        }
+        RecordType.TYPE_COMPLETED -> {
+            "Completed"
+        }
+        RecordType.TYPE_CANCELLED -> {
+            "Cancelled"
+        }
+        RecordType.TYPE_MISSED -> {
+            "Missed"
+        }
+
+        RecordType.TYPE_HAPPENING_SOON -> {
+            "Happening Soon"
+        }
+        RecordType.TYPE_BOOKING -> {
+            "Booking"
+        }
+        RecordType.TYPE_PENDING_RESULT -> {
+            "Pending Result"
+        }
+        else -> {
+            ""
+        }
+    }
 }
