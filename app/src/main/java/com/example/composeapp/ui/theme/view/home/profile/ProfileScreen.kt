@@ -1,4 +1,4 @@
-package com.example.composeapp.profile
+package com.example.composeapp.ui.theme.view.home.profile
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

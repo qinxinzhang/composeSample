@@ -1,25 +1,25 @@
-package com.example.composeapp.login
+package com.example.composeapp.ui.theme.view.home.login
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.composeapp.HomeNavigationItem
 import com.example.composeapp.R
 
 @Composable
-
-fun LoginScreen() {
-
+fun LoginScreen(navHostController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,6 +45,9 @@ fun LoginScreen() {
                 .padding(vertical = 16.dp)
                 .fillMaxWidth()
                 .height(IntrinsicSize.Max)
+                .clickable {
+                    navHostController.navigate(HomeNavigationItem.Appointment.route)
+                }
         )
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -68,10 +71,4 @@ fun LoginScreen() {
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun preview() {
-    LoginScreen()
 }

@@ -6,12 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.composeapp.HomeNavigationItem
 import com.example.composeapp.LOGIN_NAVIGATION_ID
-import com.example.composeapp.home.HomeScreen
-import com.example.composeapp.login.LoginScreen
-import com.example.composeapp.profile.ProfileScreen
-import com.example.composeapp.recordcard.RecordDetailScreen
-import com.example.composeapp.recordcard.RecordListScreen
-import com.example.composeapp.shop.ShopScreen
+import com.example.composeapp.ui.theme.view.home.HomeScreen
+import com.example.composeapp.ui.theme.view.home.login.LoginScreen
+import com.example.composeapp.ui.theme.view.home.profile.ProfileScreen
+import com.example.composeapp.ui.theme.view.home.recordcard.RecordDetailScreen
+import com.example.composeapp.ui.theme.view.home.recordcard.RecordListScreen
+import com.example.composeapp.ui.theme.view.home.shop.ShopScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 
@@ -23,14 +23,16 @@ fun NavGraph(navController: NavHostController) {
         startDestination = LOGIN_NAVIGATION_ID
     ) {
         composable(LOGIN_NAVIGATION_ID) {
-            LoginScreen()
+            LoginScreen(navController)
         }
 
         composable(HomeNavigationItem.Home.route) {
             HomeScreen()
         }
-        composable(HomeNavigationItem.Appointment.route) {
-            RecordListScreen(navController)
+
+        composable(HomeNavigationItem.Appointment.route) { backStackEntry ->
+            backStackEntry.arguments?.getString("token")
+                ?.let { RecordListScreen(navController, it) }
         }
         composable(HomeNavigationItem.Shop.route) {
             ShopScreen()

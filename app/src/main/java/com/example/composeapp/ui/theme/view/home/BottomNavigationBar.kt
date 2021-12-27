@@ -1,4 +1,4 @@
-package com.example.composeapp.home
+package com.example.composeapp.ui.theme.view.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.material.*

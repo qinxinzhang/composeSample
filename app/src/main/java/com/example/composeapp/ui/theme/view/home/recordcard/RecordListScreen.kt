@@ -1,4 +1,4 @@
-package com.example.composeapp.recordcard
+package com.example.composeapp.ui.theme.view.home.recordcard
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,13 +19,13 @@ import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun RecordListScreen(navController: NavController) {
+fun RecordListScreen(navController: NavController, token: String) {
 
+    // Creates a CoroutineScope bound to the MoviesScreen's lifecycle
     val tabTitles = listOf("All", "Upcoming", "Missed", "Completed", "Cancelled")
     val pagerState = rememberPagerState()
     // Creates a CoroutineScope bound to the MoviesScreen's lifecycle
     val scope = rememberCoroutineScope()
-
     Column {
         ScrollableTabRow(
             backgroundColor = Color.White,
@@ -71,5 +71,4 @@ fun RecordListScreen(navController: NavController) {
 
         }
     }
-
 }

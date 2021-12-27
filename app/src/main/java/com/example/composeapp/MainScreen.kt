@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.composeapp.home.BottomNavigationBar
+import com.example.composeapp.ui.theme.view.home.BottomNavigationBar
 import com.example.composeapp.navigation.NavGraph
 import com.google.accompanist.pager.ExperimentalPagerApi
 

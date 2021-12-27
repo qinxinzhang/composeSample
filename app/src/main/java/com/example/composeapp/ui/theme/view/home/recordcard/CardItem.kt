@@ -1,4 +1,4 @@
-package com.example.composeapp.recordcard
+package com.example.composeapp.ui.theme.view.home.recordcard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
