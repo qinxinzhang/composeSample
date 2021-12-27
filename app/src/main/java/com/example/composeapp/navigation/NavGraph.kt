@@ -5,7 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.composeapp.HomeNavigationItem
+import com.example.composeapp.LOGIN_NAVIGATION_ID
 import com.example.composeapp.home.HomeScreen
+import com.example.composeapp.login.LoginScreen
 import com.example.composeapp.profile.ProfileScreen
 import com.example.composeapp.recordcard.RecordDetailScreen
 import com.example.composeapp.recordcard.RecordListScreen
@@ -15,11 +17,15 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalPagerApi
 @Composable
-fun NavigationComponent(navController: NavHostController) {
+fun NavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = HomeNavigationItem.Home.route
+        startDestination = LOGIN_NAVIGATION_ID
     ) {
+        composable(LOGIN_NAVIGATION_ID) {
+            LoginScreen()
+        }
+
         composable(HomeNavigationItem.Home.route) {
             HomeScreen()
         }
