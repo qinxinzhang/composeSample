@@ -10,10 +10,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.composeapp.R
@@ -37,14 +42,22 @@ fun CancelledCard(navController: NavController, record: Item) {
                 .fillMaxWidth()
                 .height(IntrinsicSize.Max)
         ) {
-            Box(
+            ConstraintLayout(
                 Modifier
                     .fillMaxWidth()
                     .height(IntrinsicSize.Max)
                     .padding(12.dp),
 
                 ) {
+                val guildLine = createGuidelineFromStart(0.75f)
+                val (hint, status) = createRefs()
                 Text(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .constrainAs(hint) {
+                            linkTo(parent.start, guildLine)
+                            width = Dimension.preferredWrapContent
+                        },
                     text = when (record.status) {
                         RecordStatus.SERVER_CANCELLED_BY_DOCTOR -> stringResource(id = R.string.cancelled_by_doctor_hint)
                         RecordStatus.SERVER_CANCELLED_BY_PATIENT -> stringResource(id = R.string.cancelled_by_patient_hint)
@@ -52,14 +65,20 @@ fun CancelledCard(navController: NavController, record: Item) {
                             "NA"
                         }
                     },
-                    style = MaterialTheme.typography.h5,
+                    style = MaterialTheme.typography.h6,
                     color = colorResource(id = R.color.black_111)
                 )
                 Text(
-                    modifier = Modifier.align(Alignment.CenterEnd),
+                    modifier = Modifier
+                        .constrainAs(status) {
+                            end.linkTo(parent.end)
+                            top.linkTo(parent.top)
+                            bottom.linkTo(parent.bottom)
+                            width = Dimension.preferredWrapContent
+                        },
                     text = "Cancelled",
                     style = MaterialTheme.typography.body1,
-                    color = colorResource(id = R.color.grey_4bf),
+                    color = colorResource(id = R.color.grey_4bf)
                 )
             }
             RecordCardContent(record)
