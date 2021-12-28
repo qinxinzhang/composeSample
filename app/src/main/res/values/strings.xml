@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Compose App</string>
+
+    <string name="upcoming_text_days">You have an appointment in %s days</string>
+    <string name="upcoming_text_hours">You have an appointment in %s hours</string>
+    <string name="upcoming_text_minutes">You have an appointment in %s minutes</string>
+
+    <string name="upcoming_text_day">You have an appointment in 1 day</string>
+    <string name="upcoming_text_hour">You have an appointment in 1 hour</string>
+
+    <string name="cancelled_by_patient_hint">You have cancelled your appointment!</string>
+    <string name="cancelled_by_doctor_hint">Sorry! Your appointment was cancelled due to doctor unavailability</string>
+    <string name="missed_by_you_alert">You missed your appointment!</string>
+    <string name="result_pending_alert">You had an appointment!</string>
+    <string name="you_completed_appointment">You\'ve completed your appointment</string>
+    <string name="missed_by_doctor_alert">Sorry! Your appointment was missed due to doctor unavailability</string>
+    <string name="happening_now">You have an appointment now</string>
+    <string name="happening_soon">You have an appointment soon</string>
 </resources>

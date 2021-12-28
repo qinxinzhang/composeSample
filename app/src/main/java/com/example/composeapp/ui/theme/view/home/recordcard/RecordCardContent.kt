@@ -10,12 +10,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
+import coil.transform.CircleCropTransformation
 import com.example.composeapp.R
+import com.example.composeapp.data.database.model.Item
 
+@ExperimentalCoilApi
 @Composable
-fun RecordCardContent() {
+fun RecordCardContent(record: Item) {
     Column() {
         Divider(thickness = 1.dp)
         Box(
@@ -28,12 +33,23 @@ fun RecordCardContent() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painterResource(id = R.drawable.default_avatar),
-                    contentDescription = "avatar"
+                    painter = rememberImagePainter(
+                        data = record.practitioner?.avatar,
+                        onExecute = ImagePainter.ExecuteCallback { _, _ -> true },
+                        builder = {
+                            crossfade(true)
+                            placeholder(R.drawable.default_avatar)
+                            transformations(CircleCropTransformation())
+                        }
+                    ),
+                    contentDescription = null
                 )
                 Column(Modifier.padding(start = 12.dp)) {
 
-                    Text(text = "Kim Torres", style = MaterialTheme.typography.h3)
+                    Text(
+                        text = record.practitioner?.name ?: "",
+                        style = MaterialTheme.typography.h3
+                    )
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
@@ -42,7 +58,7 @@ fun RecordCardContent() {
                         )
                         Text(
                             modifier = Modifier.padding(start = 4.dp),
-                            text = "Makati Medical Center",
+                            text = record.practitioner?.hospitalName ?: "",
                             style = MaterialTheme.typography.h5,
                             color = colorResource(id = R.color.grey_d7d)
                         )
@@ -71,10 +87,4 @@ fun RecordCardContent() {
         Divider(thickness = 1.dp)
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun showPreview() {
-    RecordCardContent()
 }
