@@ -45,6 +45,12 @@ fun CardItem(navController: NavController, record: Item, currentTime: String) {
 
                 ) {
                 Text(
+                    text = "You have an appointment now",
+                    style = MaterialTheme.typography.h5,
+                    color = colorResource(id = R.color.black_111)
+                )
+                Text(
+                    modifier = Modifier.align(Alignment.CenterEnd),
                     text = getStatus(
                         TeleDoctorHelper.convertRecordStatus(
                             record.status,
@@ -53,12 +59,6 @@ fun CardItem(navController: NavController, record: Item, currentTime: String) {
                             record.end
                         )
                     ),
-                    style = MaterialTheme.typography.h5,
-                    color = colorResource(id = R.color.black_111)
-                )
-                Text(
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    text = "Happening now",
                     style = MaterialTheme.typography.body1,
                     color = colorResource(id = R.color.blue_8ff),
                 )

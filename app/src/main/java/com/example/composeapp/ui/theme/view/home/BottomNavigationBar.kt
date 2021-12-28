@@ -12,6 +12,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.composeapp.HomeNavigationItem
 import com.example.composeapp.R
+import com.example.composeapp.TOKEN
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -37,7 +38,14 @@ fun BottomNavigationBar(navController: NavController) {
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {
-                    navController.navigate(item.route) {
+                    navController.navigate(
+                        if (item.route == HomeNavigationItem.Appointment.route) {
+                            HomeNavigationItem.Appointment.route + "/$TOKEN"
+                        } else {
+                            item.route
+                        }
+
+                    ) {
                         // Pop up to the start destination of the graph to
                         // avoid building up a large stack of destinations
                         // on the back stack as users select items
