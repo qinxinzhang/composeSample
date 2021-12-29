@@ -50,17 +50,13 @@ fun MissedCard(navController: NavController, record: Item) {
                 val (hint, status) = createRefs()
                 Text(
                     modifier = Modifier
-                        .wrapContentWidth()
                         .constrainAs(hint) {
                             linkTo(parent.start, guildLine)
                             width = Dimension.preferredWrapContent
                         },
                     text = when (record.status) {
                         RecordStatus.SERVER_MISSED_BY_DOCTOR -> stringResource(id = R.string.missed_by_doctor_alert)
-                        RecordStatus.SERVER_MISSED_BY_PATIENT -> stringResource(id = R.string.missed_by_you_alert)
-                        else -> {
-                            "NA"
-                        }
+                        else -> stringResource(id = R.string.missed_by_you_alert)
                     },
                     style = MaterialTheme.typography.h5,
                     color = colorResource(id = R.color.black_111)
