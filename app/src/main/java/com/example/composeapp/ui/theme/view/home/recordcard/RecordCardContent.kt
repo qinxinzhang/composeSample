@@ -44,6 +44,8 @@ fun RecordCardContent(record: Item) {
                     .height(60.dp)
                     .constrainAs(avatar) {
                         start.linkTo(parent.start)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
                     },
                 painter = rememberImagePainter(
                     data = record.practitioner?.avatar,
@@ -58,11 +60,10 @@ fun RecordCardContent(record: Item) {
             )
             Column(
                 Modifier
-//                    .fillMaxHeight()
                     .padding(start = 12.dp)
                     .constrainAs(content) {
                         linkTo(avatar.end, arrow.start)
-                        width = Dimension.preferredWrapContent
+                        width = Dimension.fillToConstraints
                     }
             ) {
 
