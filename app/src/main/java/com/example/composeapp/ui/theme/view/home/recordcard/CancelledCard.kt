@@ -53,7 +53,6 @@ fun CancelledCard(navController: NavController, record: Item) {
                 val (hint, status) = createRefs()
                 Text(
                     modifier = Modifier
-                        .wrapContentWidth()
                         .constrainAs(hint) {
                             linkTo(parent.start, guildLine)
                             width = Dimension.preferredWrapContent
