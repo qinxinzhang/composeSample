@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.composeapp.R
@@ -35,16 +37,24 @@ fun MissedCard(navController: NavController, record: Item) {
             Modifier
                 .background(color = Color.White)
                 .fillMaxWidth()
-                .height(IntrinsicSize.Max)
+                .wrapContentHeight()
         ) {
-            Box(
+            ConstraintLayout(
                 Modifier
                     .fillMaxWidth()
                     .height(IntrinsicSize.Max)
                     .padding(12.dp),
 
                 ) {
+                val guildLine = createGuidelineFromStart(0.75f)
+                val (hint, status) = createRefs()
                 Text(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .constrainAs(hint) {
+                            linkTo(parent.start, guildLine)
+                            width = Dimension.preferredWrapContent
+                        },
                     text = when (record.status) {
                         RecordStatus.SERVER_MISSED_BY_DOCTOR -> stringResource(id = R.string.missed_by_doctor_alert)
                         RecordStatus.SERVER_MISSED_BY_PATIENT -> stringResource(id = R.string.missed_by_you_alert)
@@ -56,7 +66,13 @@ fun MissedCard(navController: NavController, record: Item) {
                     color = colorResource(id = R.color.black_111)
                 )
                 Text(
-                    modifier = Modifier.align(Alignment.CenterEnd),
+                    modifier = Modifier
+                        .constrainAs(status) {
+                            end.linkTo(parent.end)
+                            top.linkTo(parent.top)
+                            bottom.linkTo(parent.bottom)
+                            width = Dimension.preferredWrapContent
+                        },
                     text = "Missed",
                     style = MaterialTheme.typography.body1,
                     color = colorResource(id = R.color.red_757),

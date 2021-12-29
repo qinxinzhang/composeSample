@@ -52,6 +52,16 @@ object TeleDoctorHelper {
         }
     }
 
+    fun dateFormatToLocalTime(time: String): String {
+        try {
+            formatter.parse(time)?.let {
+                return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(it)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ""
+    }
 
     fun dateFormat(time: String): Date? {
         try {

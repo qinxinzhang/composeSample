@@ -40,7 +40,7 @@ fun CancelledCard(navController: NavController, record: Item) {
             Modifier
                 .background(color = Color.White)
                 .fillMaxWidth()
-                .height(IntrinsicSize.Max)
+                .wrapContentHeight()
         ) {
             ConstraintLayout(
                 Modifier
