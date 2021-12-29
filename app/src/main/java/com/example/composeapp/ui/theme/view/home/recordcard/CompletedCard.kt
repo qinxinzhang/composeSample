@@ -9,7 +9,6 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,9 +22,6 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.composeapp.R
 import com.example.composeapp.data.database.model.Item
-import com.example.composeapp.data.database.model.helper.RecordStatus
-import com.example.composeapp.data.database.model.helper.RecordType
-import com.example.composeapp.utils.TeleDoctorHelper
 
 @ExperimentalCoilApi
 @Composable
@@ -47,7 +43,6 @@ fun CompletedCard(navController: NavController, record: Item) {
             ConstraintLayout(
                 Modifier
                     .fillMaxWidth()
-                    .height(IntrinsicSize.Max)
                     .padding(12.dp),
 
                 ) {
@@ -56,10 +51,9 @@ fun CompletedCard(navController: NavController, record: Item) {
 
                 Text(
                     modifier = Modifier
-                        .wrapContentWidth()
                         .constrainAs(hint) {
                             linkTo(parent.start, guildLine)
-                            width = Dimension.preferredWrapContent
+                            width = Dimension.fillToConstraints
                         },
                     text = stringResource(id = R.string.you_completed_appointment),
                     style = MaterialTheme.typography.h6,
@@ -96,7 +90,7 @@ fun CompletedCard(navController: NavController, record: Item) {
                     text = "Give feedback",
                     color = colorResource(id = R.color.grey_d7d),
                     style = MaterialTheme.typography.h5,
-                    fontWeight = FontWeight.W500,
+                    fontWeight = FontWeight.W500
                 )
                 Divider(
                     thickness = 1.dp, modifier = Modifier
