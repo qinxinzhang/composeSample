@@ -42,7 +42,6 @@ fun MissedCard(navController: NavController, record: Item) {
             ConstraintLayout(
                 Modifier
                     .fillMaxWidth()
-                    .height(IntrinsicSize.Max)
                     .padding(12.dp),
 
                 ) {
@@ -51,7 +50,7 @@ fun MissedCard(navController: NavController, record: Item) {
                 Text(
                     modifier = Modifier
                         .constrainAs(hint) {
-                            linkTo(parent.start, guildLine)
+                            linkTo(parent.start, guildLine, bias = 0f)
                             width = Dimension.preferredWrapContent
                         },
                     text = when (record.status) {
@@ -65,9 +64,8 @@ fun MissedCard(navController: NavController, record: Item) {
                     modifier = Modifier
                         .constrainAs(status) {
                             end.linkTo(parent.end)
-                            top.linkTo(parent.top)
-                            bottom.linkTo(parent.bottom)
-                            width = Dimension.preferredWrapContent
+                            linkTo(parent.top, parent.bottom)
+                            width = Dimension.fillToConstraints
                         },
                     text = "Missed",
                     style = MaterialTheme.typography.body1,
