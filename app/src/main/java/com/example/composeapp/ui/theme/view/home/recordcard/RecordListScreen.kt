@@ -5,9 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -38,9 +36,9 @@ fun RecordListScreen(navController: NavController, token: String) {
     val recordViewModel: RecordViewModel = viewModel()
     // Creates a CoroutineScope bound to the MoviesScreen's lifecycle
     val scope = rememberCoroutineScope()
-    LaunchedEffect(key1 = "", block = {
+    LaunchedEffect(pagerState.pageCount) {
         recordViewModel.getRecordList(token)
-    })
+    }
     Column {
         ScrollableTabRow(
             backgroundColor = Color.White,
