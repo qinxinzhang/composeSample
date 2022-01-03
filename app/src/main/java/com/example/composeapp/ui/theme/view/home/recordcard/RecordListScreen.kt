@@ -166,6 +166,7 @@ fun filterList(recordType: Int, list: List<Item>, currentTime: String): List<Ite
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 fun RecordList(list: List<Item>, currentTime: String, navController: NavController) {
     LazyColumn(
